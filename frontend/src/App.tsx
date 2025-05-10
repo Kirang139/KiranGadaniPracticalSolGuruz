@@ -1,35 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import TabBar from "./components/TabBar";
+import ConfigPage from "./pages/ConfigPage";
+import VisualizePage from "./pages/VisualizePage";
+import './index.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tab, setTab] = useState(0);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="h-screen flex flex-col">
+      <TabBar current={tab} setTab={setTab} />
+      <div className="flex-1 overflow-auto bg-gray-50 p-4">
+        {tab === 0 && <ConfigPage type="3-way" />}
+        {tab === 1 && <ConfigPage type="4-way-type1" />}
+        {tab === 2 && <ConfigPage type="4-way-type2" />}
+        {tab === 3 && <ConfigPage type="5-way" />}
+        {tab === 4 && <VisualizePage />}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
